@@ -13,7 +13,27 @@
 <body>
 <?php include "_header.php";?>
 <div class="container">
-    <h1 class="text-center">Список продуктів</h1>
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center">Список продуктів</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div style="display: flex; justify-content: center;">
+                <div class="card w-75">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#" class="btn btn-primary">Button</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 <script src="js/bootstrap.bundle.min.js"></script>
