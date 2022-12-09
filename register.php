@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet"/>
     <link rel="stylesheet" href="css/style.css">
 
     <title>Сторінка реєстрації</title>
@@ -67,9 +68,9 @@
 
                                 <div class=" col-12 mb-3 mt-3">
                                     <label for="foto">Фото
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJhtPqbjHLO40vkAgI34kxJw6Zztbnh88eag&usqp=CAU"
+                                        <img src="images/default_portret.png"
                                              width="150"   height="150"
-                                             alt=""
+                                             alt="default foto"
                                              id ="selectFoto"/>
                                     </label>
                                     <input type="file"  id="foto" name="foto" style="display: none"    >
@@ -85,14 +86,49 @@
 
                             <button class=" btn btn-primary btn-lg" type="submit" style="margin-top: 20px">Continue to checkout</button>
                         </form>
+
+                        <br/>
+                        <div class="row">
+                            <!-- CROPPER dialog window -->
+                            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Crop Image Before Upload</h5>
+                                            <button type="button" id="canselCrop" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="img-container">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                        <img src="" id="sample_image" />
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="preview"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="crop" class="btn btn-primary">Crop</button>
+                                            <button type="button" id="canselCrop" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
 </div>
 
-    <script src="js/jquery/jquery-3.6.1.min.js"></script>
+<script src="js/jquery/jquery-3.6.1.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/cropperjs"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
