@@ -11,7 +11,7 @@
     <title>Сторінка входу</title>
 </head>
 <body>
-<?php include "_header.php";?>
+<?php include ($_SERVER['DOCUMENT_ROOT']."/_header.php");?>
 
 <?php
 $email = "не определено";

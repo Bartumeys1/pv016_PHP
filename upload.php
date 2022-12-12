@@ -19,7 +19,8 @@ if(isset($_POST['image']))
 
     $data = base64_decode($image_array_2[1]);
 
-    $image_name = $urlSaveImage . time() . '.jpg';
+    include ($_SERVER['DOCUMENT_ROOT']."/lib/guidv4.php");
+    $image_name = $urlSaveImage . guidv4().'.jpeg';
 
     //create catalog
     if (!is_dir($urlSaveImage))
@@ -32,7 +33,6 @@ if(isset($_POST['image']))
     file_put_contents($image_name, $data);
 
     echo $image_name;
-
 }
 
 ?>

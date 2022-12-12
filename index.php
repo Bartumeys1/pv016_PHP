@@ -11,16 +11,10 @@
     <title>Головна сторінка</title>
 </head>
 <body>
-<?php include "_header.php";?>
-
 <?php
-try {
-    $user = "root";
-    $pass="";
-    $dbh = new PDO('mysql:host=localhost;dbname=pv016', $user, $pass);
-    ?>
-
-
+include ($_SERVER['DOCUMENT_ROOT']."/_header.php");
+include ($_SERVER['DOCUMENT_ROOT']."/options/connection_database.php");
+?>
 
 <div class="container">
     <div class="row">
@@ -35,15 +29,23 @@ try {
                 <div class="container py-5">
                     <div class="row">
                         <?php
-                        foreach($dbh->query('SELECT * from tbl_products') as $row) {
-                            $image=$row["image"];
+                        $sql='SELECT p.id, p.name, p.price, pi.name as image 
+                        from tbl_products p, tbl_products_images pi 
+                        where p.id=pi.product_id and pi.priority=1;';
+                        foreach($dbh->query($sql) as $row) {
+                            $images=explode(" ",$row["image"]);
+                            if(count($images)>=2)
+                                $image = $images[rand(0,count($images)-2)];
+                            else
+                                $image = $images[0];
+                            $id = $row["id"];
                             $price=$row["price"];
                             $name=$row["name"];
                             $id=$row["id"];
                             echo '
                             <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
                             <div class="card">
-                                <img src="images/pizza/'.$image.'"
+                                <img src="images/'.$image.'"
                                      class="card-img-top" alt="Gaming Laptop"/>
                                 <div class="card-body">
 
@@ -53,7 +55,7 @@ try {
                                     </div>
 
                                     <div class="mb-2 text-end">
-                                        <button type="button" class="btn btn-success">Купить</button>
+                                        <a href="product_info.php?id='.$id.'" class="btn btn-success">Купить</a>                      
                                         <button type="button" class="btn btn-warning deleteProduct"  data-id='.$id.'>Удалити</button>
                                     </div>
                                 </div>
@@ -71,14 +73,6 @@ try {
 
 
 </div>
-
-    <?php
-    $dbh = null;
-} catch (PDOException $e) {
-    print "Error!: " . $e->getMessage() . "<br/>";
-    die();
-}
-?>
 
 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
