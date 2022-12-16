@@ -6,40 +6,48 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     $price = $_POST['price'];
     $description = $_POST['description'];
 
-    $many_images_name="";
     $dir_save = "images/";
 
+
     include ($_SERVER['DOCUMENT_ROOT'] . "/lib/guidv4.php");
-
-    foreach ($_FILES["myimages"]["error"] as $key => $error) {
-        if ($error == UPLOAD_ERR_OK) {
-            $image_name = guidv4().'.jpeg';
-            $many_images_name .=$image_name." ";
-
-            //save image in folder
-           $tmp_name = $_FILES["myimages"]["tmp_name"][$key];
-           $uploadfile = $dir_save.$image_name;
-
-            move_uploaded_file($tmp_name, $uploadfile);
-        }
-    }
-    echo $many_images_name;
-
     include($_SERVER['DOCUMENT_ROOT'].'/options/connection_database.php');
-    if (!empty($many_images_name))
-    {
-        $sql = "INSERT INTO `tbl_products` (`name`, `image`, `price`, `datecreate`, `description`) VALUES (:name, :image, :price, NOW(), :description);";
+
+
+    //save Product in database table tbl_products adn get last added product id
+
+        $sql = "INSERT INTO `tbl_products` (`name`, `price`, `datecreate`, `description`) VALUES (:name, :price, NOW(), :description);";
         $stmt = $dbh->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':image', $many_images_name);
         $stmt->execute();
-        header("Location: /");
-        exit();
-    }
+        $last_id = $dbh->lastInsertId();
 
+
+//get and save images files
+foreach ($_FILES["myimages"]["error"] as $key => $error) {
+    if ($error == UPLOAD_ERR_OK) {
+        $image_name = guidv4() . '.jpeg';
+        $product_prioriy = $key+1;
+
+        //save in database  table : tbl_products_images
+        $sql = "INSERT INTO `tbl_products_images` (`name`, `datecreate`, `priority`, `product_id`) VALUES (:name, NOW(), :priority, :product_id);";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(':name', $image_name);
+        $stmt->bindParam(':priority', $product_prioriy);
+        $stmt->bindParam(':product_id', $last_id);
+        if($stmt->execute())
+        {
+            //save image in folder
+            $tmp_name = $_FILES["myimages"]["tmp_name"][$key];
+            $uploadfile = $dir_save.$image_name;
+            move_uploaded_file($tmp_name, $uploadfile);
+        }
+    }
+}
+    header("Location: /");
 exit();
+
 }
 ?>
 

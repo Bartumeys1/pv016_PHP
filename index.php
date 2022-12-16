@@ -56,6 +56,7 @@ include ($_SERVER['DOCUMENT_ROOT']."/options/connection_database.php");
 
                                     <div class="mb-2 text-end">
                                         <a href="product_info.php?id='.$id.'" class="btn btn-success">Купить</a>                      
+                                        <a href="edit.php?id='.$id.'" class="btn btn-secondary">edit</a>                      
                                         <button type="button" class="btn btn-warning deleteProduct"  data-id='.$id.'>Удалити</button>
                                     </div>
                                 </div>
