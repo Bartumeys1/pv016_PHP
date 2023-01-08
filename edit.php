@@ -271,82 +271,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     });
 
-/*
-    function change_handler(element)
-    {
-       let clone = element.cloneNode(true);
-        clone.setAttribute('id',"insercElement");
 
-        clone.onchange= null;
-        clone.removeAttribute("onchange");
-        clone.removeEventListener('onchange',change_handler); //???
-
-        clone.querySelector(`#RemoveImage`).addEventListener("click" , function (){
-            clone.remove();
-        });
-        clone.setAttribute("draggable" , true);
-
-        var input_loadFile = clone.querySelector('#foto');
-        var files = input_loadFile.files;
-        var fr = new FileReader();
-        fr.onload = function () {
-            clone.querySelector("#defaultFoto").src = fr.result;
-        }
-        fr.readAsDataURL(files[0]);
-        clone.addEventListener('dragenter', dragEnter)
-        clone.addEventListener('dragover', dragOver);
-        clone.addEventListener('dragleave', dragLeave);
-        clone.addEventListener('drop', drop);
-        document.getElementById("images_view").appendChild(clone);
-    }
-
-    function single_change_handler(element)
-    {
-        var input_loadFile = element.querySelector('#foto');
-        var files = input_loadFile.files;
-        var fr = new FileReader();
-        fr.onload = function () {
-            element.querySelector("#defaultFoto").src = fr.result;
-        }
-        fr.readAsDataURL(files[0]);
-    }
-
- */
 </script>
-
-<!--
-<div class="mb-3">
-    <div class="thumbnail text-center d-flex justify-content-center" id="images_view">
-        <label for="foto"  id="0" onchange="change_handler(this)"  class="box" style="position: relative;" draggable="false">
-            <div id="queryElement">
-                <img src="images/default_portret.png"
-                     width="150"   height="150"
-                     alt="default foto"
-                     id ="defaultFoto"/>
-                <input type="file"  id="foto" name="foto"   style="display: none"    >
-            </div>
-            <input type="button" id="RemoveImage" class="btn-close"  hidden="hidden" style="position: absolute;left: 0px; top: 0px">
-        </label>
-        <?php
-/*
-        foreach ($images as $img) {
-            echo '<label for="foto"  id="0" onchange="change_handler(this)"  class="box" style="position: relative;" draggable="false">
-                    <div id="queryElement">
-                        <img src="images/'.$img['name'].'"
-                             width="150"   height="150"
-                             alt="default foto"
-                             id ="defaultFoto"/>
-                        <input type="file"  id="foto" name="foto"   style="display: none"    >
-                    </div>
-                    <input type="button" id="RemoveImage" class="btn-close"  style="position: absolute;left: 0px; top: 0px">
-                </label>';
-        }
-*/
-        ?>
-
-    </div>
-</div>
--->
 </body>
 </html>
 
